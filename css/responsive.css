@@ -1,0 +1,239 @@
+/* ========================================
+   DESIDERIO - RESPONSIVE STYLES
+   ======================================== */
+
+/* ----------------------------------------
+   TABLET (max-width: 1024px)
+   ---------------------------------------- */
+@media (max-width: 1024px) {
+    :root {
+        --header-height: 70px;
+    }
+
+    h1 {
+        font-size: var(--text-4xl);
+    }
+
+    h2 {
+        font-size: var(--text-3xl);
+    }
+
+    .section {
+        padding: var(--space-16) 0;
+    }
+
+    .section-full {
+        padding: var(--space-16) 0;
+    }
+}
+
+/* ----------------------------------------
+   MOBILE (max-width: 768px)
+   ---------------------------------------- */
+@media (max-width: 768px) {
+    :root {
+        --header-height: 60px;
+    }
+
+    html {
+        font-size: 16px;
+    }
+
+    h1 {
+        font-size: var(--text-4xl);
+    }
+
+    h2 {
+        font-size: var(--text-3xl);
+    }
+
+    h3 {
+        font-size: var(--text-2xl);
+    }
+
+    p, .about-bio, .exhibition-item {
+        font-size: var(--text-base);
+        text-align: justify;
+    }
+
+    .nav-link {
+        font-size: var(--text-xl);
+    }
+
+    .gallery-item-title, .category-card-title {
+        font-size: var(--text-sm);
+    }
+
+    .intro-text {
+        font-size: var(--text-lg);
+    }
+
+    .container {
+        padding: 0 var(--space-4);
+    }
+
+    .section {
+        padding: var(--space-12) 0;
+    }
+
+    .section-full {
+        padding: var(--space-12) 0;
+    }
+
+    /* Mobile Navigation */
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(235, 232, 224, 0.95);
+        backdrop-filter: blur(30px) saturate(180%);
+        -webkit-backdrop-filter: blur(30px) saturate(180%);
+        border-left: 1px solid rgba(255, 255, 255, 0.5);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: var(--space-8) 0;
+        gap: var(--space-6);
+        transform: translateX(100%);
+        transition: transform var(--transition-base);
+    }
+
+    .nav.active {
+        transform: translateX(0);
+    }
+
+    .nav-link {
+        font-size: var(--text-lg);
+        padding: var(--space-4) 0;
+    }
+
+    .social-links {
+        margin-top: var(--space-8);
+    }
+
+    /* Mobile Menu Animation */
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+    /* Hide desktop social links in header on mobile */
+    .header .social-links {
+        display: none;
+    }
+
+    .nav .social-links {
+        display: flex;
+    }
+}
+
+/* ----------------------------------------
+   SMALL MOBILE (max-width: 480px)
+   ---------------------------------------- */
+@media (max-width: 480px) {
+    html {
+        font-size: 15px;
+    }
+
+    h1 {
+        font-size: var(--text-3xl);
+    }
+
+    h2 {
+        font-size: var(--text-2xl);
+    }
+
+    h3 {
+        font-size: var(--text-xl);
+    }
+
+    .nav-link {
+        font-size: var(--text-lg);
+    }
+
+    .section {
+        padding: var(--space-10) 0;
+    }
+
+    .container {
+        padding: 0 var(--space-3);
+    }
+}
+
+/* ----------------------------------------
+   LANDSCAPE ORIENTATION
+   ---------------------------------------- */
+@media (max-height: 500px) and (orientation: landscape) {
+    :root {
+        --header-height: 50px;
+    }
+
+    .section-full {
+        min-height: auto;
+        padding: var(--space-8) 0;
+    }
+
+    .nav {
+        padding: var(--space-4) 0;
+    }
+}
+
+/* ----------------------------------------
+   HIGH RESOLUTION SCREENS
+   ---------------------------------------- */
+@media (min-width: 1920px) {
+    html {
+        font-size: 18px;
+    }
+
+    :root {
+        --max-width: 1600px;
+    }
+}
+
+/* ----------------------------------------
+   PRINT STYLES
+   ---------------------------------------- */
+@media print {
+    .header,
+    .footer,
+    .menu-toggle,
+    .social-links {
+        display: none !important;
+    }
+
+    .main {
+        margin-top: 0;
+    }
+
+    body {
+        background-color: white;
+        color: black;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+    img {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+    }
+
+    .page-break {
+        page-break-before: always;
+    }
+}
