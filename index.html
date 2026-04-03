@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Desiderio - Artista plástico. Galería de obras, exposiciones y biografía.">
+    <meta name="keywords" content="Desiderio, artista, pintura, arte, galería, obras">
+    <meta name="author" content="Desiderio">
+    <meta property="og:title" content="Desiderio - Artista">
+    <meta property="og:description" content="Sitio web oficial del artista Desiderio">
+    <meta property="og:type" content="website">
+    <title>Desiderio - Artista</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/sobre-mi.css">
+    <link rel="stylesheet" href="css/obras.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <style>
+        /* Single Page Navigation Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        section {
+            min-height: 100vh;
+            padding-top: var(--header-height);
+        }
+
+        section#inicio {
+            min-height: calc(100vh - var(--header-height));
+            padding-top: 0;
+        }
+
+        /* Active nav link based on scroll position */
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link.active {
+            opacity: 1;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Categories Preview Grid - 3 columns x 2 rows */
+        .categories-preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: var(--space-6);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            position: relative;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            cursor: pointer;
+            background-color: var(--color-bg-menu);
+            border-radius: 4px;
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .category-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .category-card-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: var(--space-6);
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            text-align: center;
+        }
+
+        .category-card-title {
+            font-family: var(--font-elegant);
+            font-size: var(--text-xl);
+            color: var(--color-white);
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-1);
+        }
+
+        .category-card-count {
+            font-family: var(--font-menu);
+            font-size: var(--text-xs);
+            color: rgba(255, 255, 255, 0.8);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Back Button */
+        .back-to-categories {
+            display: none;
+            align-items: center;
+            gap: var(--space-2);
+            font-family: var(--font-menu);
+            font-size: var(--text-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-6);
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            padding: var(--space-2) 0;
+        }
+
+        .back-to-categories.visible {
+            display: inline-flex;
+        }
+
+        .back-to-categories svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .categories-preview {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .categories-preview {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+
+            .category-card-title {
+                font-size: var(--text-lg);
+            }
+        }
+
+        /* Initial state - show categories, hide gallery */
+        #galleryGrid {
+            display: none;
+        }
+
+        #categoriesPreview {
+            display: grid;
+        }
+
+        /* Contact Section Styles */
+        .contact-page {
+            background-color: var(--color-bg);
+            padding: var(--space-16) 0;
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .contact-title {
+            font-family: var(--font-elegant);
+            font-size: var(--text-4xl);
+            text-align: center;
+            margin-bottom: var(--space-8);
+            letter-spacing: 0.05em;
+        }
+
+        .contact-intro {
+            font-family: var(--font-body);
+            font-size: var(--text-lg);
+            text-align: center;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-12);
+            line-height: 1.8;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-12);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-6);
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+        }
+
+        .contact-label {
+            font-family: var(--font-menu);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--color-text-secondary);
+        }
+
+        .contact-value {
+            font-family: var(--font-body);
+            font-size: var(--text-base);
+            color: var(--color-text);
+        }
+
+        .contact-value a {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .contact-social {
+            display: flex;
+            gap: var(--space-4);
+            margin-top: var(--space-4);
+        }
+
+        .contact-social-link {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-bg-menu);
+            border-radius: 50%;
+            transition: all var(--transition-base);
+        }
+
+        .contact-social-link:hover {
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            opacity: 1;
+        }
+
+        .contact-social-link svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .contact-form-wrapper {
+            background-color: var(--color-bg-menu);
+            padding: var(--space-8);
+            border-radius: 4px;
+        }
+
+        .form-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .form-label {
+            display: block;
+            font-family: var(--font-menu);
+            font-size: var(--text-xs);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-2);
+            color: var(--color-text-secondary);
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: var(--space-3) var(--space-4);
+            font-family: var(--font-body);
+            font-size: var(--text-base);
+            color: var(--color-text);
+            background-color: var(--color-white);
+            border: 1px solid var(--color-border);
+            border-radius: 2px;
+            transition: border-color var(--transition-fast);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--color-text);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: var(--space-4);
+            font-family: var(--font-menu);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-white);
+            background-color: var(--color-accent);
+            border: none;
+            cursor: pointer;
+            transition: opacity var(--transition-fast);
+        }
+
+        .form-submit:hover {
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-10);
+            }
+
+            .contact-title {
+                font-size: var(--text-3xl);
+            }
+
+            .contact-form-wrapper {
+                padding: var(--space-6);
+            }
+        }
+
+        /* ========================================
+           GLASSMORPHISM EFFECTS - Crystal Details
+           ======================================== */
+
+        /* Header Glass Effect */
+        .header {
+            background: rgba(235, 232, 224, 0.75);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Navigation Links Glass Hover */
+        .nav-link {
+            padding: var(--space-2) var(--space-4);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            opacity: 1;
+        }
+
+        /* Category Cards Glass Effect */
+        .category-card {
+            background: rgba(245, 242, 237, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .category-card-overlay {
+            background: linear-gradient(
+                to top,
+                rgba(0, 0, 0, 0.7) 0%,
+                rgba(0, 0, 0, 0.3) 50%,
+                transparent 100%
+            );
+            backdrop-filter: blur(4px);
+        }
+
+        /* Gallery Items Glass Border */
+        .gallery-item {
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            background: rgba(235, 232, 224, 0.4);
+        }
+
+        .gallery-item:hover {
+            box-shadow:
+                0 12px 40px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+
+        /* Filter Buttons Glass */
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            padding: var(--space-2) var(--space-5);
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-btn.active {
+            background: rgba(26, 26, 26, 0.9);
+            color: var(--color-white);
+            border: 1px solid rgba(26, 26, 26, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Form Inputs Glass */
+        .form-input,
+        .form-textarea {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            box-shadow:
+                inset 0 2px 4px rgba(0, 0, 0, 0.05),
+                0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(26, 26, 26, 0.3);
+            box-shadow:
+                inset 0 2px 4px rgba(0, 0, 0, 0.05),
+                0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Contact Form Wrapper Glass */
+        .contact-form-wrapper {
+            background: rgba(235, 232, 224, 0.5);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 24px;
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        /* Social Links Glass */
+        .contact-social-link {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .contact-social-link:hover {
+            background: rgba(26, 26, 26, 0.9);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer Glass */
+        .footer {
+            background: rgba(235, 232, 224, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        /* Lightbox Enhanced Glass */
+        .lightbox {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(30px);
+        }
+
+        /* Buttons Glass Effect */
+        .btn {
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: rgba(26, 26, 26, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Carousel Buttons Glass */
+        .carousel-btn {
+            background: rgba(245, 242, 237, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Menu Toggle Glass */
+        .menu-toggle {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            padding: var(--space-3);
+        }
+
+        /* Back to Categories Button Glass */
+        .back-to-categories {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            padding: var(--space-3) var(--space-5);
+            transition: all 0.3s ease;
+        }
+
+        .back-to-categories:hover {
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-inner">
+            <a href="#inicio" class="logo">Desiderio</a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="nav" id="mainNav">
+                <a href="#inicio" class="nav-link active">Inicio</a>
+                <a href="#sobre-mi" class="nav-link">Sobre mí</a>
+                <a href="#obras" class="nav-link">Obras</a>
+                <a href="#videos" class="nav-link">Videos</a>
+                <a href="#contacto" class="nav-link">Contacto</a>
+
+                <div class="social-links">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram" data-encoded="aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS9kZXNpZGVyaW9kZWxnYWRvX3BpbnRvch" data-suffix="?igsh=ZnN3aWg2c2lhbTNw">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Facebook" data-encoded="aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2Rlc2lkZXJpby5kZWxnYWRvY2hhdmFycmlh">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                        </svg>
+                    </a>
+                </div>
+            </nav>
+
+        </div>
+    </header>
+
+    <!-- SECCIÓN INICIO -->
+    <section id="inicio">
+        <!-- Hero Carousel -->
+        <div class="hero">
+            <div class="carousel" id="homeCarousel">
+                <div class="carousel-slide active">
+                    <img src="assets/images/inicio/0.1.webp" alt="Obra de Desiderio 1" loading="eager">
+                </div>
+                <div class="carousel-slide">
+                    <img src="assets/images/inicio/0.2.webp" alt="Obra de Desiderio 2" loading="lazy">
+                </div>
+                <div class="carousel-slide">
+                    <img src="assets/images/inicio/0.3.webp" alt="Obra de Desiderio 3" loading="lazy">
+                </div>
+                <div class="carousel-slide">
+                    <img src="assets/images/inicio/0.5.webp" alt="Obra de Desiderio 4" loading="lazy">
+                </div>
+                <div class="carousel-slide">
+                    <img src="assets/images/inicio/DESIDERIO_29.webp" alt="Obra de Desiderio 5" loading="lazy">
+                </div>
+
+                <!-- Carousel Indicators -->
+                <div class="carousel-indicators">
+                    <button class="indicator active" data-slide="0" aria-label="Ir a slide 1"></button>
+                    <button class="indicator" data-slide="1" aria-label="Ir a slide 2"></button>
+                    <button class="indicator" data-slide="2" aria-label="Ir a slide 3"></button>
+                    <button class="indicator" data-slide="3" aria-label="Ir a slide 4"></button>
+                    <button class="indicator" data-slide="4" aria-label="Ir a slide 5"></button>
+                </div>
+
+                <!-- Carousel Controls -->
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev" id="carouselPrev" aria-label="Imagen anterior">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                        </svg>
+                    </button>
+                    <button class="carousel-btn next" id="carouselNext" aria-label="Imagen siguiente">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hero Overlay -->
+            <div class="hero-overlay">
+                <h1 class="hero-title">Desiderio</h1>
+                <p class="hero-subtitle">Artista Plástico</p>
+            </div>
+        </div>
+
+        <!-- Intro Section -->
+        <div class="intro-section">
+            <div class="container">
+                <div class="intro-text">
+                    <p>El arte es la expresión de lo invisible a través de lo visible. Cada obra es un viaje hacia el interior, una exploración de la esencia humana y la belleza del mundo que nos rodea.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Works Section -->
+        <div class="featured-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Obras Destacadas</h2>
+                    <p class="section-subtitle">Una selección de mi trabajo</p>
+                </div>
+
+                <div class="featured-grid">
+                    <a href="#obras" class="featured-item">
+                        <img src="assets/images/obras/pilones/DESIDERIO_01.webp" alt="Serie Pilones" loading="lazy">
+                        <div class="featured-item-overlay">
+                            <span class="featured-item-title">Serie Pilones</span>
+                        </div>
+                    </a>
+                    <a href="#obras" class="featured-item">
+                        <img src="assets/images/obras/arquitectura/DESIDERIO_28.webp" alt="Arquitectura" loading="lazy">
+                        <div class="featured-item-overlay">
+                            <span class="featured-item-title">Arquitectura</span>
+                        </div>
+                    </a>
+                    <a href="#obras" class="featured-item">
+                        <img src="assets/images/obras/bodegones/frutero.webp" alt="Bodegones" loading="lazy">
+                        <div class="featured-item-overlay">
+                            <span class="featured-item-title">Bodegones</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN SOBRE MÍ -->
+    <section id="sobre-mi" class="about-page">
+        <div class="about-container">
+            <div class="about-grid">
+                <!-- Artist Image -->
+                <div class="about-image-wrapper">
+                    <div class="about-image">
+                        <img src="assets/images/sobre-mi/DSC_0080.webp" alt="Desiderio - Artista" loading="eager">
+                    </div>
+                </div>
+
+                <!-- Artist Bio -->
+                <div class="about-content">
+                    <h1 class="about-title text-elegant">Desiderio</h1>
+
+                    <div class="about-bio text-elegant">
+                        <p>Artista plástico con una trayectoria marcada por la búsqueda constante de nuevas formas de expresión. Su obra se caracteriza por una profunda sensibilidad hacia el entorno y la capacidad de transformar lo cotidiano en experiencias visuales únicas.</p>
+                        <p>A lo largo de su carrera, ha explorado diversas técnicas y estilos, desde la representación arquitectónica hasta la abstracción más pura, pasando por el estudio detallado de la naturaleza y los elementos tradicionales de la cultura andaluza.</p>
+                        <p>Su serie de pilones, inspirada en los tradicionales pilones de la Sierra de Córdoba, constituye uno de sus trabajos más reconocidos, donde combina la precisión técnica con una visión poética del paisaje.</p>
+                    </div>
+
+                    <!-- Exhibitions -->
+                    <div class="exhibitions-section">
+                        <h2 class="exhibitions-title text-elegant">Exposiciones</h2>
+
+                        <div class="exhibition-category">
+                            <h3 class="exhibition-category-title">Exposiciones Individuales</h3>
+                            <ul class="exhibition-list">
+                                <li class="exhibition-item"><span class="exhibition-year">2023</span><span class="exhibition-details">Galería Ansorena, Madrid</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2020</span><span class="exhibition-details">Exposición "Pilones", Centro Cultural, Cádiz</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2018</span><span class="exhibition-details">Galería de Arte Contemporáneo, Sevilla</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2015</span><span class="exhibition-details">Museo Municipal, Jerez de la Frontera</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2012</span><span class="exhibition-details">Sala de Exposiciones El Águila, Madrid</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2010</span><span class="exhibition-details">Galería Carmen del Campo, Córdoba</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2008</span><span class="exhibition-details">Centro de Arte Moderno, Málaga</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2005</span><span class="exhibition-details">Galería Rafael Ortiz, Sevilla</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2002</span><span class="exhibition-details">Sala Cultural Cajasol, Cádiz</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">1998</span><span class="exhibition-details">Galería Ad Hoc, Sevilla</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">1993</span><span class="exhibition-details">Exposición "Arquitecturas", Galería El Claustro, Cádiz</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">1986</span><span class="exhibition-details">Primera exposición individual, Sala de Exposiciones del Ateneo, Cádiz</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="exhibition-category">
+                            <h3 class="exhibition-category-title">Exposiciones Colectivas</h3>
+                            <ul class="exhibition-list">
+                                <li class="exhibition-item"><span class="exhibition-year">2024</span><span class="exhibition-details">"Arte Contemporáneo Andaluz", Centro Cultural de la Villa, Madrid</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2022</span><span class="exhibition-details">Bienal de Arte de Córdoba</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2019</span><span class="exhibition-details">"Paisajes del Sur", Museo Carmen Thyssen, Málaga</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2016</span><span class="exhibition-details">Salón de Otoño, Sevilla</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2013</span><span class="exhibition-details">Exposición Colectiva de Pintores Gaditanos, Cádiz</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2009</span><span class="exhibition-details">"Arte y Naturaleza", Jardín Botánico de Cádiz</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2006</span><span class="exhibition-details">Feria Internacional de Arte Contemporáneo, Madrid</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2001</span><span class="exhibition-details">Exposición itinerante "Andalucía Pintada", varias ciudades</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">1997</span><span class="exhibition-details">Salón de Primavera, Cádiz</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">1992</span><span class="exhibition-details">Bienal de Pintura de la Provincia de Cádiz</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">1991</span><span class="exhibition-details">Exposición Colectiva de Jóvenes Artistas, Cádiz</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN OBRAS -->
+    <section id="obras" class="gallery-page">
+        <div class="gallery-container">
+            <h1 class="gallery-title text-elegant">Obras</h1>
+
+            <!-- Back Button -->
+            <button class="back-to-categories" id="backToCategories">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                Volver a categorías
+            </button>
+
+            <!-- Filters -->
+            <div class="gallery-filters" id="galleryFilters">
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="pilones">Pilones</button>
+                <button class="filter-btn" data-filter="arquitectura">Arquitectura</button>
+                <button class="filter-btn" data-filter="bodegones">Bodegones</button>
+                <button class="filter-btn" data-filter="carteles">Carteles</button>
+                <button class="filter-btn" data-filter="dibujo">Dibujo</button>
+                <button class="filter-btn" data-filter="otras-miradas">Otras miradas</button>
+                <button class="filter-btn" data-filter="retratos">Retratos</button>
+            </div>
+
+            <!-- Categories Preview -->
+            <div class="categories-preview" id="categoriesPreview">
+                <div class="category-card" data-category="pilones">
+                    <img src="assets/images/obras/pilones/DESIDERIO_01.webp" alt="Serie Pilones" loading="eager">
+                    <div class="category-card-overlay">
+                        <h3 class="category-card-title">Pilones</h3>
+                        <span class="category-card-count">96 obras</span>
+                    </div>
+                </div>
+                <div class="category-card" data-category="arquitectura">
+                    <img src="assets/images/obras/arquitectura/DESIDERIO_28.webp" alt="Arquitectura" loading="eager">
+                    <div class="category-card-overlay">
+                        <h3 class="category-card-title">Arquitectura</h3>
+                        <span class="category-card-count">6 obras</span>
+                    </div>
+                </div>
+                <div class="category-card" data-category="bodegones">
+                    <img src="assets/images/obras/bodegones/frutero.webp" alt="Bodegones" loading="eager">
+                    <div class="category-card-overlay">
+                        <h3 class="category-card-title">Bodegones</h3>
+                        <span class="category-card-count">4 obras</span>
+                    </div>
+                </div>
+                <div class="category-card" data-category="carteles">
+                    <img src="assets/images/obras/carteles/Flamenco_3.webp" alt="Carteles" loading="eager">
+                    <div class="category-card-overlay">
+                        <h3 class="category-card-title">Carteles</h3>
+                        <span class="category-card-count">10 obras</span>
+                    </div>
+                </div>
+                <div class="category-card" data-category="dibujo">
+                    <img src="assets/images/obras/dibujo/DESIDERIO_dib01.webp" alt="Dibujo" loading="eager">
+                    <div class="category-card-overlay">
+                        <h3 class="category-card-title">Dibujo</h3>
+                        <span class="category-card-count">14 obras</span>
+                    </div>
+                </div>
+                <div class="category-card" data-category="otras-miradas">
+                    <img src="assets/images/obras/otras-miradas/DESIDERIO_ANSORENA4013.webp" alt="Otras miradas" loading="eager">
+                    <div class="category-card-overlay">
+                        <h3 class="category-card-title">Otras miradas</h3>
+                        <span class="category-card-count">35 obras</span>
+                    </div>
+                </div>
+                <div class="category-card" data-category="retratos">
+                    <img src="assets/images/obras/retratos/AA_01h.webp" alt="Retratos" loading="eager">
+                    <div class="category-card-overlay">
+                        <h3 class="category-card-title">Retratos</h3>
+                        <span class="category-card-count">8 obras</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gallery Grid (Hidden initially) -->
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- PILONES -->
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_01.webp" alt="Pilón I" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón I</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_02.webp" alt="Pilón II" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón II</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_03.webp" alt="Pilón III" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón III</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_04.webp" alt="Pilón IV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón IV</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_05.webp" alt="Pilón V" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón V</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_06.webp" alt="Pilón VI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón VI</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_07.webp" alt="Pilón VII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón VII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_08.webp" alt="Pilón VIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón VIII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_09.webp" alt="Pilón IX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón IX</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_11.webp" alt="Pilón XI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XI</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_12.webp" alt="Pilón XII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_13.webp" alt="Pilón XIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XIII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_14.webp" alt="Pilón XIV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XIV</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_15.webp" alt="Pilón XV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XV</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_16.webp" alt="Pilón XVI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XVI</span></div></div>
+
+                <!-- PILONES (continuación) -->
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/Desiderio 01 (Copiar)_preview.webp" alt="Pilón XVII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XVII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/Desiderio 04 (Copiar)_preview.webp" alt="Pilón XVIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XVIII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/Desiderio 07 (Copiar)_preview.webp" alt="Pilón XIX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XIX</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/Desiderio 08 (Copiar)_preview.webp" alt="Pilón XX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XX</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/Desiderio 10 (Copiar)_preview.webp" alt="Pilón XXI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXI</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/Desiderio 14 (Copiar)_preview.webp" alt="Pilón XXI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXI</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/Desiderio 15 (Copiar)_preview.webp" alt="Pilón XXIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/sin título-0973_preview.webp" alt="Pilón XXIV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIV</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/sin título-0981_preview.webp" alt="Pilón XXIVI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIVI</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/sin título-0988_preview.webp" alt="Pilón XXIVII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIVII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/sin título-1058_preview.webp" alt="Pilón XXIVIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIVIII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/hornachuelos-pilon.webp" alt="Pilón XXVIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXVIII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/ronda-pilon.webp" alt="Pilón XXIX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIX</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/cervera-i-pilon.webp" alt="Pilón XXIXI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIXI</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/5.webp" alt="Pilón XXIXII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIXII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/7.webp" alt="Pilón XXIXIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIXIII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/50X22.webp" alt="Pilón XXIXIV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIXIV</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/60X60.webp" alt="Pilón XXIXV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIXV</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/60X80.webp" alt="Pilón XXIXVI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIXVI</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/60X80–.webp" alt="Pilón XXIXVII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIXVII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/60X80––.webp" alt="Pilón XXIXVIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIXVIII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/77X60.webp" alt="Pilón XXIXIX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXIXIX</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/94X122.webp" alt="Pilón XXXIX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXXIX</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/98X122.webp" alt="Pilón XXXIXI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXXIXI</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/100X60.webp" alt="Pilón XXXIXII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXXIXII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/100X60,5.webp" alt="Pilón XXXIXIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXXIXIII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/100X61.webp" alt="Pilón XXXIXIV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXXIXIV</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/100X150.webp" alt="Pilón XXXIXV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXXIXV</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/100X150–.webp" alt="Pilón XXXIXVI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXXIXVI</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/AA_025.webp" alt="Pilón XXXIXVII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXXIXVII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/AA_0104.webp" alt="Pilón XXXIXVIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXXIXVIII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/AA_0125.webp" alt="Pilón XXXIXIX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XXXIXIX</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/AA_0130.webp" alt="Pilón XLIX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIX</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/AA_0195.webp" alt="Pilón XLIXI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXI</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/IMG_1136(1).webp" alt="Pilón XLIXII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/IMG_1137.webp" alt="Pilón XLIXIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXIII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/IMG_20210422_105537.webp" alt="Pilón XLIXIV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXIV</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/IMG_20210422_105659.webp" alt="Pilón XLIXV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXV</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/IMG_20210422_105827.webp" alt="Pilón XLIXVI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXVI</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/IMG_20210422_105946.webp" alt="Pilón XLIXVII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXVII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/IMG_20210422_110100.webp" alt="Pilón XLIXVIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXVIII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/IMG_20210422_110455.webp" alt="Pilón XLIXIX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXIX</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/IMG_20210424_195510.webp" alt="Pilón XLIXX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXX</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/IMG_20220109_155537.webp" alt="Pilón XLIXXI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXI</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_17.webp" alt="Pilón XLIXXII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_18.webp" alt="Pilón XLIXXIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXIII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_19.webp" alt="Pilón XLIXXIV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXIV</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_20.webp" alt="Pilón XLIXXV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXV</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_21.webp" alt="Pilón XLIXXVI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXVI</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_22.webp" alt="Pilón XLIXXVII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXVII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_23.webp" alt="Pilón XLIXXVIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXVIII</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_25.webp" alt="Pilón XLIXXIX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXIX</span></div></div>
+                <div class="gallery-item" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_26.webp" alt="Pilón XLIXXX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXX</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_ANSORENA4012.webp" alt="Pilón XLIXXXI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXI</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_ANSORENA4014.webp" alt="Pilón XLIXXXII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_ANSORENA4017.webp" alt="Pilón XLIXXXIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXIII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_ANSORENA4018.webp" alt="Pilón XLIXXXIV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXIV</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_ANSORENA4019.webp" alt="Pilón XLIXXXV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXV</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_ANSORENA4020.webp" alt="Pilón XLIXXXVI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXVI</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_ANSORENA4023.webp" alt="Pilón XLIXXXVII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXVII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/DESIDERIO_ANSORENA4024.webp" alt="Pilón XLIXXXVIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXVIII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_1.webp" alt="Pilón XLIXXXIX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXIX</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_2.webp" alt="Pilón XLIXXXX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXX</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_3.webp" alt="Pilón XLIXXXXI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXXI</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_4.webp" alt="Pilón XLIXXXXII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXXII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_5.webp" alt="Pilón XLIXXXXIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXXIII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_6.webp" alt="Pilón XLIXXXXIV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXXIV</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_7.webp" alt="Pilón XLIXXXXV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXXV</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_8.webp" alt="Pilón XLIXXXXVI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXXVI</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_9.webp" alt="Pilón XLIXXXXVII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXXVII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_10.webp" alt="Pilón XLIXXXXVIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXXVIII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_11.webp" alt="Pilón XLIXXXXIX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XLIXXXXIX</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_12.webp" alt="Pilón LXXXIX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón LXXXIX</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_13.webp" alt="Pilón XC" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XC</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_14.webp" alt="Pilón XCI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XCI</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_15.webp" alt="Pilón XCII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XCII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_16.webp" alt="Pilón XCIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XCIII</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_17.webp" alt="Pilón XCIV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XCIV</span></div></div>
+                <div class="gallery-item tall" data-category="pilones"><img src="assets/images/obras/pilones/S_Pilones_18.webp" alt="Pilón XCV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Pilón XCV</span></div></div>
+
+                <!-- ARQUITECTURA -->
+                <div class="gallery-item wide" data-category="arquitectura"><img src="assets/images/obras/arquitectura/DESIDERIO_28.webp" alt="Arquitectura I" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Arquitectura I</span></div></div>
+                <div class="gallery-item" data-category="arquitectura"><img src="assets/images/obras/arquitectura/DESIDERIO_29.webp" alt="Arquitectura II" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Arquitectura II</span></div></div>
+                <div class="gallery-item" data-category="arquitectura"><img src="assets/images/obras/arquitectura/DESIDERIO_ANSORENA4011.webp" alt="Arquitectura III" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Arquitectura III</span></div></div>
+                <div class="gallery-item" data-category="arquitectura"><img src="assets/images/obras/arquitectura/0.webp" alt="Arquitectura IV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Arquitectura IV</span></div></div>
+                <div class="gallery-item tall" data-category="arquitectura"><img src="assets/images/obras/arquitectura/IMG_9622.webp" alt="Arquitectura V" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Arquitectura V</span></div></div>
+                <div class="gallery-item" data-category="arquitectura"><img src="assets/images/obras/arquitectura/IMG_9625.webp" alt="Arquitectura VI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Arquitectura VI</span></div></div>
+
+                <!-- BODEGONES -->
+                <div class="gallery-item" data-category="bodegones"><img src="assets/images/obras/bodegones/Dibujo sifon.webp" alt="Bodegón I" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Bodegón I</span></div></div>
+                <div class="gallery-item" data-category="bodegones"><img src="assets/images/obras/bodegones/frutero.webp" alt="Bodegón II" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Bodegón II</span></div></div>
+                <div class="gallery-item" data-category="bodegones"><img src="assets/images/obras/bodegones/jarra.webp" alt="Bodegón III" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Bodegón III</span></div></div>
+                <div class="gallery-item" data-category="bodegones"><img src="assets/images/obras/bodegones/membrillos-2.webp" alt="Bodegón IV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Bodegón IV</span></div></div>
+                <div class="gallery-item" data-category="bodegones"><img src="assets/images/obras/bodegones/membrillos.webp" alt="Bodegón V" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Bodegón V</span></div></div>
+                <div class="gallery-item" data-category="bodegones"><img src="assets/images/obras/bodegones/naranjas.webp" alt="Bodegón VI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Bodegón VI</span></div></div>
+                <div class="gallery-item" data-category="bodegones"><img src="assets/images/obras/bodegones/uvas.webp" alt="Bodegón VII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Bodegón VII</span></div></div>
+                <div class="gallery-item" data-category="bodegones"><img src="assets/images/obras/bodegones/Bote amarillo_low.webp" alt="Bodegón VIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Bodegón VIII</span></div></div>
+
+                <!-- CARTELES -->
+                <div class="gallery-item" data-category="carteles"><img src="assets/images/obras/carteles/Flamenco_3.webp" alt="Cartel Flamenco I" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Cartel Flamenco I</span></div></div>
+                <div class="gallery-item tall" data-category="carteles"><img src="assets/images/obras/carteles/Flamenco_6a.webp" alt="Cartel Flamenco II" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Cartel Flamenco II</span></div></div>
+                <div class="gallery-item" data-category="carteles"><img src="assets/images/obras/carteles/Flamenco_10.webp" alt="Cartel Flamenco III" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Cartel Flamenco III</span></div></div>
+                <div class="gallery-item" data-category="carteles"><img src="assets/images/obras/carteles/Flamenco_14a.webp" alt="Cartel Flamenco IV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Cartel Flamenco IV</span></div></div>
+                <div class="gallery-item" data-category="carteles"><img src="assets/images/obras/carteles/Flamenco_15.webp" alt="Cartel Flamenco V" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Cartel Flamenco V</span></div></div>
+                <div class="gallery-item" data-category="carteles"><img src="assets/images/obras/carteles/Flamenco_20.webp" alt="Cartel Flamenco VI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Cartel Flamenco VI</span></div></div>
+                <div class="gallery-item" data-category="carteles"><img src="assets/images/obras/carteles/Flamenco_100.webp" alt="Cartel Flamenco VII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Cartel Flamenco VII</span></div></div>
+                <div class="gallery-item" data-category="carteles"><img src="assets/images/obras/carteles/Flamenco_200.webp" alt="Cartel Flamenco VIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Cartel Flamenco VIII</span></div></div>
+                <div class="gallery-item" data-category="carteles"><img src="assets/images/obras/carteles/Flamenco_210.webp" alt="Cartel Flamenco IX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Cartel Flamenco IX</span></div></div>
+                <div class="gallery-item" data-category="carteles"><img src="assets/images/obras/carteles/Flamenco_25.webp" alt="Cartel Flamenco X" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Cartel Flamenco X</span></div></div>
+
+                <!-- DIBUJO -->
+                <div class="gallery-item tall" data-category="dibujo"><img src="assets/images/obras/dibujo/DESIDERIO_dib01.webp" alt="Dibujo I" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Dibujo I</span></div></div>
+                <div class="gallery-item tall" data-category="dibujo"><img src="assets/images/obras/dibujo/DESIDERIO_dib02.webp" alt="Dibujo II" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Dibujo II</span></div></div>
+                <div class="gallery-item tall" data-category="dibujo"><img src="assets/images/obras/dibujo/DESIDERIO_dib03.webp" alt="Dibujo III" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Dibujo III</span></div></div>
+                <div class="gallery-item tall" data-category="dibujo"><img src="assets/images/obras/dibujo/DESIDERIO_dib04.webp" alt="Dibujo IV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Dibujo IV</span></div></div>
+                <div class="gallery-item tall" data-category="dibujo"><img src="assets/images/obras/dibujo/DESIDERIO_dib05.webp" alt="Dibujo V" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Dibujo V</span></div></div>
+                <div class="gallery-item tall" data-category="dibujo"><img src="assets/images/obras/dibujo/DESIDERIO_dib06.webp" alt="Dibujo VI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Dibujo VI</span></div></div>
+                <div class="gallery-item tall" data-category="dibujo"><img src="assets/images/obras/dibujo/DESIDERIO_dib07.webp" alt="Dibujo VII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Dibujo VII</span></div></div>
+                <div class="gallery-item tall" data-category="dibujo"><img src="assets/images/obras/dibujo/20 (1).webp" alt="Dibujo VIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Dibujo VIII</span></div></div>
+                <div class="gallery-item tall" data-category="dibujo"><img src="assets/images/obras/dibujo/IMG_20220513_133021.webp" alt="Dibujo IX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Dibujo IX</span></div></div>
+                <div class="gallery-item tall" data-category="dibujo"><img src="assets/images/obras/dibujo/IMG_2639(1).webp" alt="Dibujo X" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Dibujo X</span></div></div>
+                <div class="gallery-item tall" data-category="dibujo"><img src="assets/images/obras/dibujo/IMG_9258.webp" alt="Dibujo XI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Dibujo XI</span></div></div>
+                <div class="gallery-item tall" data-category="dibujo"><img src="assets/images/obras/dibujo/PA080391.webp" alt="Dibujo XII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Dibujo XII</span></div></div>
+                <div class="gallery-item tall" data-category="dibujo"><img src="assets/images/obras/dibujo/S_Dibujos_4.webp" alt="Dibujo XIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Dibujo XIII</span></div></div>
+                <div class="gallery-item tall" data-category="dibujo"><img src="assets/images/obras/dibujo/S_Dibujos_5.webp" alt="Dibujo XIV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Dibujo XIV</span></div></div>
+
+                <!-- OTRAS MIRADAS -->
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/100X150 ––––.webp" alt="Otras miradas I" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas I</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/122X180.webp" alt="Otras miradas II" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas II</span></div></div>
+                <div class="gallery-item wide" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/122X220.webp" alt="Otras miradas III" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas III</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/50X70.webp" alt="Otras miradas IV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas IV</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/78X60.webp" alt="Otras miradas V" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas V</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/Desiderio 03 (Copiar)_preview.webp" alt="Otras miradas VI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas VI</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/Desiderio 11 (Copiar)_preview.webp" alt="Otras miradas VII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas VII</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/Desiderio 12 (Copiar)_preview.webp" alt="Otras miradas VIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas VIII</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/Desiderio 13 (Copiar)_preview.webp" alt="Otras miradas IX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas IX</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/Desiderio 16 (Copiar)_preview.webp" alt="Otras miradas X" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas X</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/DESIDERIO_10.webp" alt="Otras miradas XI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XI</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/DESIDERIO_24.webp" alt="Otras miradas XII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XII</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/DESIDERIO_31.webp" alt="Otras miradas XIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XIII</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/DESIDERIO_32.webp" alt="Otras miradas XIV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XIV</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/DESIDERIO_ANSORENA4013.webp" alt="Otras miradas XVI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XVI</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/DESIDERIO_ANSORENA4015.webp" alt="Otras miradas XVII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XVII</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/DESIDERIO_ANSORENA4016.webp" alt="Otras miradas XVIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XVIII</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/DESIDERIO_ANSORENA4021.webp" alt="Otras miradas XIX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XIX</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/DESIDERIO_ANSORENA4022.webp" alt="Otras miradas XX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XX</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/Desiderio 25 (Copiar)_preview.webp" alt="Otras miradas XXIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXIII</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/5.webp" alt="Otras miradas XXIV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXIV</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/AA_0100.webp" alt="Otras miradas XXV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXV</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/AA_0105.webp" alt="Otras miradas XXVI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXVI</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/AA_0180.webp" alt="Otras miradas XXVII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXVII</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/S_Albercas_3.webp" alt="Otras miradas XXVIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXVIII</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/S_Albercas_8.webp" alt="Otras miradas XXIX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXIX</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/S_Albercas_14.webp" alt="Otras miradas XXX" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXX</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/S_Arboles_1.webp" alt="Otras miradas XXXI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXXI</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/S_Arboles_4.webp" alt="Otras miradas XXXII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXXII</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/S_Arboles_5.webp" alt="Otras miradas XXXIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXXIII</span></div></div>
+                <div class="gallery-item tall" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/S_Arboles_6.webp" alt="Otras miradas XXXIV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXXIV</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/S_Arboles_7.webp" alt="Otras miradas XXXV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXXV</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/S_Arboles_8.webp" alt="Otras miradas XXXVI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXXVI</span></div></div>
+                <div class="gallery-item" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/S_Arboles_9.webp" alt="Otras miradas XXXVII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXXVII</span></div></div>
+                <div class="gallery-item wide" data-category="otras-miradas"><img src="assets/images/obras/otras-miradas/RIBERA DEL GUADALQUIVIR.webp" alt="Otras miradas XXXVIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Otras miradas XXXVIII</span></div></div>
+
+                <!-- RETRATOS -->
+                <div class="gallery-item" data-category="retratos"><img src="assets/images/obras/retratos/05.webp" alt="Retrato I" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Retrato I</span></div></div>
+                <div class="gallery-item" data-category="retratos"><img src="assets/images/obras/retratos/10 (1).webp" alt="Retrato II" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Retrato II</span></div></div>
+                <div class="gallery-item" data-category="retratos"><img src="assets/images/obras/retratos/30.webp" alt="Retrato III" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Retrato III</span></div></div>
+                <div class="gallery-item tall" data-category="retratos"><img src="assets/images/obras/retratos/AA_01a.webp" alt="Retrato IV" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Retrato IV</span></div></div>
+                <div class="gallery-item tall" data-category="retratos"><img src="assets/images/obras/retratos/AA_01d.webp" alt="Retrato V" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Retrato V</span></div></div>
+                <div class="gallery-item tall" data-category="retratos"><img src="assets/images/obras/retratos/AA_01e.webp" alt="Retrato VI" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Retrato VI</span></div></div>
+                <div class="gallery-item tall" data-category="retratos"><img src="assets/images/obras/retratos/AA_01f.webp" alt="Retrato VII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Retrato VII</span></div></div>
+                <div class="gallery-item wide" data-category="retratos"><img src="assets/images/obras/retratos/AA_01h.webp" alt="Retrato VIII" loading="lazy"><div class="gallery-item-overlay"><span class="gallery-item-title">Retrato VIII</span></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN VIDEOS -->
+    <section id="videos">
+        <div class="videos-container" style="max-width: var(--max-width); margin: 0 auto; padding: var(--space-16) var(--space-6);">
+            <h1 class="videos-title text-elegant" style="font-family: var(--font-elegant); font-size: var(--text-4xl); text-align: center; margin-bottom: var(--space-8); letter-spacing: 0.05em;">Videos</h1>
+
+            <div class="videos-empty" style="text-align: center; padding: var(--space-20) 0;">
+                <div class="videos-empty-icon" style="width: 80px; height: 80px; margin: 0 auto var(--space-6); opacity: 0.3;">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                        <path d="M18 3v2h-2V3H8v2H6V3H4v18h2v-2h2v2h8v-2h2v2h2V3h-2zM8 17H6v-2h2v2zm0-4H6v-2h2v2zm0-4H6V7h2v2zm10 8h-2v-2h2v2zm0-4h-2v-2h2v2zm0-4h-2V7h2v2zM12 8.5l6.5 4-6.5 4v-8z"/>
+                    </svg>
+                </div>
+                <p class="videos-empty-text" style="font-family: var(--font-elegant); font-size: var(--text-xl); color: var(--color-text-secondary);">Próximamente disponibles</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN CONTACTO -->
+    <section id="contacto" class="contact-page">
+        <div class="contact-container">
+            <h1 class="contact-title text-elegant">Contacto</h1>
+
+            <p class="contact-intro">
+                Si deseas obtener más información sobre mi obra, disponibilidad de piezas o cualquier otra consulta, no dudes en contactarme.
+            </p>
+
+            <div class="contact-grid">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-label">Email</span>
+                        <span class="contact-value">
+                            <a href="#" data-encoded="bWFpbHRvOmRlc2lkZXJpb2RlbGdhZG9AbXNuLmNvbQ==">desideriodelgado@msn.com</a>
+                        </span>
+                    </div>
+
+                    <div class="contact-item">
+                        <span class="contact-label">Estudio</span>
+                        <span class="contact-value">Córdoba, España</span>
+                    </div>
+
+                    <div class="contact-item">
+                        <span class="contact-label">Sígueme</span>
+                        <div class="contact-social">
+                            <a href="#" class="contact-social-link" aria-label="Instagram">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                </svg>
+                            </a>
+                            <a href="#" class="contact-social-link" aria-label="Facebook">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Nombre</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="subject">Asunto</label>
+                            <input type="text" id="subject" name="subject" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="message">Mensaje</label>
+                            <textarea id="message" name="message" class="form-textarea" required></textarea>
+                        </div>
+
+                        <button type="submit" class="form-submit">Enviar mensaje</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2026 José Baena. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+        </button>
+        <button class="lightbox-nav prev" id="lightboxPrev" aria-label="Imagen anterior">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+            </svg>
+        </button>
+        <div class="lightbox-content">
+            <img class="lightbox-image" id="lightboxImage" src="" alt="">
+            <p class="lightbox-caption" id="lightboxCaption"></p>
+        </div>
+        <button class="lightbox-nav next" id="lightboxNext" aria-label="Imagen siguiente">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/gallery.js"></script>
+    <script>
+        // Single page navigation highlighting
+        (function() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            function updateActiveLink() {
+                let current = '';
+                const scrollPos = window.scrollY + 150;
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', updateActiveLink);
+            updateActiveLink();
+
+            // Contact form handler
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                var email = 'desideriodelgado@msn.com';
+                var name = document.getElementById('name').value;
+                var emailFrom = document.getElementById('email').value;
+                var subject = document.getElementById('subject').value;
+                var message = document.getElementById('message').value;
+                var body = 'Nombre: ' + name + '\nEmail: ' + emailFrom + '\n\n' + message;
+                var mailtoLink = 'mailto:' + email + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+                window.location.href = mailtoLink;
+                alert('Gracias por tu mensaje. Te contactaré pronto.');
+                this.reset();
+            });
+        })();
+
+        // Category navigation functionality
+        (function() {
+            const categoriesPreview = document.getElementById('categoriesPreview');
+            const galleryGrid = document.getElementById('galleryGrid');
+            const galleryFilters = document.getElementById('galleryFilters');
+            const backToCategories = document.getElementById('backToCategories');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+
+            // Initially show categories, hide gallery
+            if (categoriesPreview) categoriesPreview.style.display = 'grid';
+            if (galleryGrid) galleryGrid.style.display = 'none';
+
+            // Category cards click handler
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const category = card.dataset.category;
+                    showCategory(category);
+                });
+            });
+
+            // Back button handler
+            if (backToCategories) {
+                backToCategories.addEventListener('click', () => {
+                    showCategoriesView();
+                });
+            }
+
+            // Filter buttons handler
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const filter = btn.dataset.filter;
+                    if (filter === 'all') {
+                        showCategoriesView();
+                    } else {
+                        showCategory(filter);
+                    }
+                });
+            });
+
+            function showCategory(category) {
+                // Hide categories, show gallery
+                if (categoriesPreview) categoriesPreview.style.display = 'none';
+                if (galleryGrid) galleryGrid.style.display = 'grid';
+                if (backToCategories) backToCategories.classList.add('visible');
+
+                // Update filter buttons
+                filterButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.filter === category);
+                });
+
+                // Filter gallery items
+                document.querySelectorAll('.gallery-item').forEach(item => {
+                    if (item.dataset.category === category) {
+                        item.classList.remove('hidden');
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            }
+
+            function showCategoriesView() {
+                // Show categories, hide gallery
+                if (categoriesPreview) categoriesPreview.style.display = 'grid';
+                if (galleryGrid) galleryGrid.style.display = 'none';
+                if (backToCategories) backToCategories.classList.remove('visible');
+
+                // Reset filter buttons
+                filterButtons.forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.filter === 'all');
+                });
+            }
+        })();
+    </script>
+    <script>
+    document.querySelectorAll('[data-encoded]').forEach(function(link) {
+        var encoded = link.getAttribute('data-encoded');
+        var suffix = link.getAttribute('data-suffix') || '';
+        var url = atob(encoded) + suffix;
+        link.setAttribute('href', url);
+    });
+    </script>
+</body>
+</html>
