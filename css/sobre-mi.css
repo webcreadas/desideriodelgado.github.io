@@ -156,13 +156,12 @@
 }
 
 .exhibition-item {
-    display: flex;
+    display: inline-flex;
     gap: var(--space-6);
     font-family: 'Manrope', sans-serif;
     font-size: var(--text-sm);
     line-height: 1.6;
     justify-content: center;
-    text-align: center;
 }
 
 .exhibition-year {
@@ -172,7 +171,6 @@
 
 .exhibition-details {
     color: var(--color-text-secondary);
-    text-align: left;
 }
 
 .exhibition-location {
