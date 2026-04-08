@@ -99,7 +99,7 @@
    ---------------------------------------- */
 .exhibitions-page {
     background-color: #BDBAAA;
-    padding: var(--space-24) 0;
+    padding: var(--space-16) 0;
 }
 
 .exhibitions-container {
@@ -162,16 +162,6 @@
     margin-bottom: var(--space-6);
     color: var(--color-text);
     text-align: center;
-}
-
-.exhibition-category-title {
-    font-family: 'Manrope', sans-serif;
-    font-size: var(--text-sm);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    margin-bottom: var(--space-6);
-    color: var(--color-text-secondary);
 }
 
 .exhibition-list {
