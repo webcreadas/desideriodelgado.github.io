@@ -89,11 +89,14 @@
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: var(--space-6);
     touch-action: pan-y;
+    justify-items: center;
 }
 
 .gallery-item {
     position: relative;
     aspect-ratio: 1 / 1;
+    width: 100%;
+    max-width: 350px;
     overflow: hidden;
     cursor: pointer;
     background-color: var(--color-bg-menu);
