@@ -95,17 +95,14 @@
 
 .gallery-item {
     position: relative;
-    aspect-ratio: 4 / 5;
     overflow: hidden;
     cursor: pointer;
     background-color: var(--color-bg-menu);
     transition: transform var(--transition-base), opacity 0.4s ease, filter 0.4s ease;
     opacity: 1;
     border-radius: 16px;
-}
-
-.gallery-item:hover {
-    transform: translateY(-4px);
+    aspect-ratio: 4 / 5;
+    width: 100%;
 }
 
 .gallery-item.hidden {
@@ -359,9 +356,5 @@
 @media (max-width: 480px) {
     .gallery-grid {
         grid-template-columns: 1fr;
-    }
-
-    .gallery-item.tall {
-        grid-row: span 1;
     }
 }
