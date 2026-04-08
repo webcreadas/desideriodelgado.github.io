@@ -43,14 +43,17 @@
             width: 100%;
         }
 
-        /* Categories Preview Grid - 3 columns x 2 rows */
+        /* Categories Preview Grid - 4 columns first row, 3 second row */
         .categories-preview {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: repeat(2, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: var(--space-6);
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        .categories-preview .category-card:nth-child(n+5) {
+            grid-column: span 1;
         }
 
         .category-card {
@@ -133,8 +136,7 @@
 
         @media (max-width: 1024px) {
             .categories-preview {
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: repeat(3, 1fr);
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
@@ -369,7 +371,7 @@
             box-shadow:
                 0 8px 32px rgba(0, 0, 0, 0.08),
                 inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            border-radius: 16px;
+            border-radius: 4px;
         }
 
         .category-card:hover {
@@ -708,6 +710,14 @@
     <section id="obras" class="gallery-page">
         <div class="gallery-container">
             <h1 class="gallery-title text-elegant">Obras</h1>
+
+            <!-- Back Button -->
+            <button class="back-to-categories" id="backToCategories">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                Volver a categorías
+            </button>
 
             <!-- Categories Preview -->
             <div class="categories-preview" id="categoriesPreview">
