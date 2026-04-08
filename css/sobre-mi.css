@@ -6,7 +6,7 @@
    ABOUT PAGE LAYOUT - Parte 1 (Biografía)
    ---------------------------------------- */
 .about-page {
-    background-color: var(--color-bg-section-1);
+    background-color: #F4F2EC;
     padding: var(--space-24) 0;
     min-height: calc(100vh - var(--header-height));
     display: flex;
@@ -98,7 +98,7 @@
    EXHIBITIONS PAGE - Parte 2 (Fondo alternado)
    ---------------------------------------- */
 .exhibitions-page {
-    background-color: var(--color-bg-section-2);
+    background-color: #BDBAAA;
     padding: var(--space-24) 0;
 }
 
@@ -109,8 +109,9 @@
 }
 
 .exhibitions-title {
-    font-family: 'Gilda Display', serif;
+    font-family: 'Manrope', sans-serif;
     font-size: var(--text-3xl);
+    font-weight: 600;
     margin-bottom: var(--space-12);
     letter-spacing: 0.05em;
     text-align: center;
