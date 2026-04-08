@@ -90,10 +90,13 @@
    CSS VARIABLES
    ---------------------------------------- */
 :root {
-    /* Colors */
+    /* Colors - Based on design mockups */
     --color-bg: #c5bdb0;
     --color-bg-light: #f5f2ed;
     --color-bg-menu: #ebe8e0;
+    --color-bg-hero: #EEEDE4;
+    --color-bg-section-1: #F4F2EC;
+    --color-bg-section-2: #BDBAAA;
     --color-text: #1a1a1a;
     --color-text-secondary: #4a4a4a;
     --color-accent: #000000;
@@ -333,14 +336,11 @@ p {
     max-width: var(--max-width);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .logo {
-    font-family: var(--font-elegant);
-    font-size: var(--text-2xl);
-    color: var(--color-text);
-    letter-spacing: 0.05em;
+    display: none;
 }
 
 .nav {
