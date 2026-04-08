@@ -100,6 +100,7 @@
 .exhibitions-page {
     background-color: #BDBAAA;
     padding: var(--space-16) 0;
+    min-height: calc(100vh - var(--header-height));
 }
 
 .exhibitions-container {
