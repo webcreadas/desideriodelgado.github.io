@@ -157,7 +157,7 @@
     font-family: 'Manrope', sans-serif;
     font-size: var(--text-3xl);
     font-weight: 600;
-    text-transform: none;
+    text-transform: uppercase;
     letter-spacing: 0.05em;
     margin-bottom: var(--space-6);
     color: var(--color-text);
