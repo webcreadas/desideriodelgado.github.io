@@ -417,16 +417,20 @@
             opacity: 1;
         }
 
-        /* Category Cards Glass Effect */
         .category-card {
-            background: rgba(245, 242, 237, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            box-shadow:
-                0 8px 32px rgba(0, 0, 0, 0.08),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            border-radius: 4px;
+            position: relative;
+            aspect-ratio: 5 / 3;
+            overflow: hidden;
+            cursor: pointer;
+            background-color: var(--color-bg-menu);
+            border-radius: 16px;
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
+            width: 320px;
+        }
+
+        .category-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
         }
 
         .category-card:hover {
