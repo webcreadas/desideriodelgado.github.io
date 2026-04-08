@@ -162,16 +162,17 @@
     font-size: var(--text-sm);
     line-height: 1.6;
     justify-content: center;
+    text-align: center;
 }
 
 .exhibition-year {
     font-weight: 600;
-    min-width: 50px;
     color: var(--color-text);
 }
 
 .exhibition-details {
     color: var(--color-text-secondary);
+    text-align: left;
 }
 
 .exhibition-location {
