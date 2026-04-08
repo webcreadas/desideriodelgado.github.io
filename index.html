@@ -177,6 +177,8 @@
         /* Initial state - show categories, hide gallery */
         #galleryGrid {
             display: none;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         #categoriesPreview {
@@ -1204,7 +1206,7 @@
             const filterButtons = document.querySelectorAll('.filter-btn');
 
             // Initially show categories, hide gallery
-            if (categoriesPreview) categoriesPreview.style.display = 'grid';
+            if (categoriesPreview) categoriesPreview.style.display = 'flex';
             if (galleryGrid) galleryGrid.style.display = 'none';
 
             // Category cards click handler
@@ -1237,7 +1239,7 @@
             function showCategory(category) {
                 // Hide categories, show gallery
                 if (categoriesPreview) categoriesPreview.style.display = 'none';
-                if (galleryGrid) galleryGrid.style.display = 'grid';
+                if (galleryGrid) galleryGrid.style.display = 'flex';
                 if (backToCategories) backToCategories.classList.add('visible');
 
                 // Update filter buttons
@@ -1259,7 +1261,7 @@
 
             function showCategoriesView() {
                 // Show categories, hide gallery
-                if (categoriesPreview) categoriesPreview.style.display = 'grid';
+                if (categoriesPreview) categoriesPreview.style.display = 'flex';
                 if (galleryGrid) galleryGrid.style.display = 'none';
                 if (backToCategories) backToCategories.classList.remove('visible');
 
