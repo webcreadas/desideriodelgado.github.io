@@ -8,18 +8,22 @@
 .about-page {
     background-color: var(--color-bg-section-1);
     padding: var(--space-24) 0;
+    min-height: calc(100vh - var(--header-height));
+    display: flex;
+    align-items: center;
 }
 
 .about-container {
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 var(--space-8);
+    width: 100%;
 }
 
 .about-grid {
     display: grid;
     grid-template-columns: auto auto;
-    gap: var(--space-8);
+    gap: var(--space-12);
     align-items: center;
     justify-content: center;
 }
@@ -148,14 +152,16 @@
     display: flex;
     flex-direction: column;
     gap: var(--space-3);
+    align-items: center;
 }
 
 .exhibition-item {
     display: flex;
-    gap: var(--space-4);
+    gap: var(--space-6);
     font-family: 'Manrope', sans-serif;
     font-size: var(--text-sm);
     line-height: 1.6;
+    justify-content: center;
 }
 
 .exhibition-year {
@@ -287,7 +293,7 @@
     .exhibition-item {
         font-size: var(--text-xs);
         flex-direction: column;
-        gap: var(--space-1);
+        gap: var(--space-2);
         text-align: center;
     }
 
