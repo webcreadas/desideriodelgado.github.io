@@ -95,21 +95,30 @@
     touch-action: pan-y;
 }
 
+/* Gallery Items Glass Effect */
 .gallery-item {
+    background: rgba(245, 242, 237, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    border-radius: 4px;
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    background-color: var(--color-bg-menu);
-    transition: transform var(--transition-base), box-shadow var(--transition-base), opacity 0.4s ease, filter 0.4s ease;
     opacity: 1;
-    border-radius: 16px;
     aspect-ratio: 5 / 3;
     width: 320px;
 }
 
 .gallery-item:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+    box-shadow:
+        0 12px 40px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .gallery-item.hidden {
