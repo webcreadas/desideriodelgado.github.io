@@ -163,6 +163,7 @@
     margin-bottom: var(--space-6);
     color: var(--color-text);
     text-align: center;
+    white-space: nowrap;
 }
 
 .exhibition-list {
