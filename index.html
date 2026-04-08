@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Desiderio Delgado - Artista plástico. Galería de obras, exposiciones y biografía.">
-    <meta name="keywords" content="Desiderio Delgado, artista, pintura, arte, galería, obras">
-    <meta name="author" content="Desiderio Delgado">
-    <meta property="og:title" content="Desiderio Delgado - Artista">
-    <meta property="og:description" content="Sitio web oficial del artista Desiderio Delgado">
-    <title>Desiderio Delgado - Artista</title>
+    <meta name="description" content="Desiderio - Artista plástico. Galería de obras, exposiciones y biografía.">
+    <meta name="keywords" content="Desiderio, artista, pintura, arte, galería, obras">
+    <meta name="author" content="Desiderio">
+    <meta property="og:title" content="Desiderio - Artista">
+    <meta property="og:description" content="Sitio web oficial del artista Desiderio">
+    <meta property="og:type" content="website">
+    <title>Desiderio - Artista</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/sobre-mi.css">
@@ -546,6 +547,8 @@
     <!-- Header -->
     <header class="header">
         <div class="header-inner">
+            <a href="#inicio" class="logo">Desiderio</a>
+
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
                 <span></span>
                 <span></span>
@@ -623,81 +626,112 @@
 
             <!-- Hero Overlay -->
             <div class="hero-overlay">
-                <h1 class="hero-title">Desiderio Delgado</h1>
+                <h1 class="hero-title">Desiderio</h1>
+                <p class="hero-subtitle">Artista Plástico</p>
+            </div>
+        </div>
+
+        <!-- Intro Section -->
+        <div class="intro-section">
+            <div class="container">
+                <div class="intro-text">
+                    <p>El arte es la expresión de lo invisible a través de lo visible. Cada obra es un viaje hacia el interior, una exploración de la esencia humana y la belleza del mundo que nos rodea.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Works Section -->
+        <div class="featured-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Obras Destacadas</h2>
+                    <p class="section-subtitle">Una selección de mi trabajo</p>
+                </div>
+
+                <div class="featured-grid">
+                    <a href="#obras" class="featured-item">
+                        <img src="assets/images/obras/pilones/DESIDERIO_01.webp" alt="Serie Pilones" loading="lazy">
+                        <div class="featured-item-overlay">
+                            <span class="featured-item-title">Serie Pilones</span>
+                        </div>
+                    </a>
+                    <a href="#obras" class="featured-item">
+                        <img src="assets/images/obras/arquitectura/DESIDERIO_28.webp" alt="Arquitectura" loading="lazy">
+                        <div class="featured-item-overlay">
+                            <span class="featured-item-title">Arquitectura</span>
+                        </div>
+                    </a>
+                    <a href="#obras" class="featured-item">
+                        <img src="assets/images/obras/bodegones/frutero.webp" alt="Bodegones" loading="lazy">
+                        <div class="featured-item-overlay">
+                            <span class="featured-item-title">Bodegones</span>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN SOBRE MÍ - PARTE 1: BIOGRAFÍA -->
+    <!-- SECCIÓN SOBRE MÍ -->
     <section id="sobre-mi" class="about-page">
         <div class="about-container">
             <div class="about-grid">
-                <!-- Artist Bio (izquierda) -->
-                <div class="about-content">
-                    <div class="about-title-wrapper">
-                        <h1 class="about-title text-elegant">Desiderio</h1>
-                        <h2 class="about-subtitle">DELGADO</h2>
-                    </div>
-
-                    <div class="about-bio text-elegant">
-                        <p>El eje central de mi obra gira en torno a la poesía del agua. Desde muy pequeño me he sentido muy atraído por este elemento.</p>
-                        <p>Siempre que me perdía me encontraban cerca de una acequia o un arroyo.</p>
-                        <p>Considero por tanto que este elemento ha sido decisivo en mi reflexión pictórica.</p>
-                        <p>La ejecución de mis obras se caracteriza por una pincelada suelta y concisa, capaz de transmitir contrastes, luces y sombras. La dualidad entre abstracción y figuración está siempre presente.</p>
-                    </div>
-                </div>
-
-                <!-- Artist Image (derecha) -->
+                <!-- Artist Image -->
                 <div class="about-image-wrapper">
                     <div class="about-image">
-                        <img src="assets/images/sobre-mi/DSC_0080.webp" alt="Desiderio Delgado - Artista" loading="eager">
+                        <img src="assets/images/sobre-mi/DSC_0080.webp" alt="Desiderio - Artista" loading="eager">
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- SECCIÓN SOBRE MÍ - PARTE 2: EXPOSICIONES -->
-    <section id="exposiciones" class="exhibitions-page">
-        <div class="exhibitions-container">
-            <h2 class="exhibitions-title text-elegant">Exposiciones</h2>
+                <!-- Artist Bio -->
+                <div class="about-content">
+                    <h1 class="about-title text-elegant">Desiderio</h1>
 
-            <div class="exhibitions-grid">
-                <div class="exhibition-category">
-                    <h3 class="exhibition-category-title">Exposiciones Colectivas</h3>
-                    <ul class="exhibition-list">
-                        <li class="exhibition-item"><span class="exhibition-year">2024</span><span class="exhibition-details">"Arte Contemporáneo Andaluz", Centro Cultural de la Villa, Madrid</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2022</span><span class="exhibition-details">Bienal de Arte de Córdoba</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2019</span><span class="exhibition-details">"Paisajes del Sur", Museo Carmen Thyssen, Málaga</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2016</span><span class="exhibition-details">Salón de Otoño, Sevilla</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2013</span><span class="exhibition-details">Exposición Colectiva de Pintores Gaditanos, Cádiz</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2009</span><span class="exhibition-details">"Arte y Naturaleza", Jardín Botánico de Cádiz</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2006</span><span class="exhibition-details">Feria Internacional de Arte Contemporáneo, Madrid</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2001</span><span class="exhibition-details">Exposición itinerante "Andalucía Pintada", varias ciudades</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">1997</span><span class="exhibition-details">Salón de Primavera, Cádiz</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">1992</span><span class="exhibition-details">Bienal de Pintura de la Provincia de Cádiz</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">1991</span><span class="exhibition-details">Exposición Colectiva de Jóvenes Artistas, Cádiz</span></li>
-                    </ul>
-                </div>
+                    <div class="about-bio text-elegant">
+                        <p>Artista plástico con una trayectoria marcada por la búsqueda constante de nuevas formas de expresión. Su obra se caracteriza por una profunda sensibilidad hacia el entorno y la capacidad de transformar lo cotidiano en experiencias visuales únicas.</p>
+                        <p>A lo largo de su carrera, ha explorado diversas técnicas y estilos, desde la representación arquitectónica hasta la abstracción más pura, pasando por el estudio detallado de la naturaleza y los elementos tradicionales de la cultura andaluza.</p>
+                        <p>Su serie de pilones, inspirada en los tradicionales pilones de la Sierra de Córdoba, constituye uno de sus trabajos más reconocidos, donde combina la precisión técnica con una visión poética del paisaje.</p>
+                    </div>
 
-                <div class="exhibitions-divider"></div>
+                    <!-- Exhibitions -->
+                    <div class="exhibitions-section">
+                        <h2 class="exhibitions-title text-elegant">Exposiciones</h2>
 
-                <div class="exhibition-category">
-                    <h3 class="exhibition-category-title">Exposiciones Individuales</h3>
-                    <ul class="exhibition-list">
-                        <li class="exhibition-item"><span class="exhibition-year">2023</span><span class="exhibition-details">Galería Ansorena, Madrid</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2020</span><span class="exhibition-details">Exposición "Pilones", Centro Cultural, Cádiz</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2018</span><span class="exhibition-details">Galería de Arte Contemporáneo, Sevilla</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2015</span><span class="exhibition-details">Museo Municipal, Jerez de la Frontera</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2012</span><span class="exhibition-details">Sala de Exposiciones El Águila, Madrid</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2010</span><span class="exhibition-details">Galería Carmen del Campo, Córdoba</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2008</span><span class="exhibition-details">Centro de Arte Moderno, Málaga</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2005</span><span class="exhibition-details">Galería Rafael Ortiz, Sevilla</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">2002</span><span class="exhibition-details">Sala Cultural Cajasol, Cádiz</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">1998</span><span class="exhibition-details">Galería Ad Hoc, Sevilla</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">1993</span><span class="exhibition-details">Exposición "Arquitecturas", Galería El Claustro, Cádiz</span></li>
-                        <li class="exhibition-item"><span class="exhibition-year">1986</span><span class="exhibition-details">Primera exposición individual, Sala de Exposiciones del Ateneo, Cádiz</span></li>
-                    </ul>
+                        <div class="exhibition-category">
+                            <h3 class="exhibition-category-title">Exposiciones Individuales</h3>
+                            <ul class="exhibition-list">
+                                <li class="exhibition-item"><span class="exhibition-year">2023</span><span class="exhibition-details">Galería Ansorena, Madrid</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2020</span><span class="exhibition-details">Exposición "Pilones", Centro Cultural, Cádiz</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2018</span><span class="exhibition-details">Galería de Arte Contemporáneo, Sevilla</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2015</span><span class="exhibition-details">Museo Municipal, Jerez de la Frontera</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2012</span><span class="exhibition-details">Sala de Exposiciones El Águila, Madrid</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2010</span><span class="exhibition-details">Galería Carmen del Campo, Córdoba</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2008</span><span class="exhibition-details">Centro de Arte Moderno, Málaga</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2005</span><span class="exhibition-details">Galería Rafael Ortiz, Sevilla</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2002</span><span class="exhibition-details">Sala Cultural Cajasol, Cádiz</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">1998</span><span class="exhibition-details">Galería Ad Hoc, Sevilla</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">1993</span><span class="exhibition-details">Exposición "Arquitecturas", Galería El Claustro, Cádiz</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">1986</span><span class="exhibition-details">Primera exposición individual, Sala de Exposiciones del Ateneo, Cádiz</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="exhibition-category">
+                            <h3 class="exhibition-category-title">Exposiciones Colectivas</h3>
+                            <ul class="exhibition-list">
+                                <li class="exhibition-item"><span class="exhibition-year">2024</span><span class="exhibition-details">"Arte Contemporáneo Andaluz", Centro Cultural de la Villa, Madrid</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2022</span><span class="exhibition-details">Bienal de Arte de Córdoba</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2019</span><span class="exhibition-details">"Paisajes del Sur", Museo Carmen Thyssen, Málaga</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2016</span><span class="exhibition-details">Salón de Otoño, Sevilla</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2013</span><span class="exhibition-details">Exposición Colectiva de Pintores Gaditanos, Cádiz</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2009</span><span class="exhibition-details">"Arte y Naturaleza", Jardín Botánico de Cádiz</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2006</span><span class="exhibition-details">Feria Internacional de Arte Contemporáneo, Madrid</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">2001</span><span class="exhibition-details">Exposición itinerante "Andalucía Pintada", varias ciudades</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">1997</span><span class="exhibition-details">Salón de Primavera, Cádiz</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">1992</span><span class="exhibition-details">Bienal de Pintura de la Provincia de Cádiz</span></li>
+                                <li class="exhibition-item"><span class="exhibition-year">1991</span><span class="exhibition-details">Exposición Colectiva de Jóvenes Artistas, Cádiz</span></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -707,6 +741,26 @@
     <section id="obras" class="gallery-page">
         <div class="gallery-container">
             <h1 class="gallery-title text-elegant">Obras</h1>
+
+            <!-- Back Button -->
+            <button class="back-to-categories" id="backToCategories">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                    <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+                </svg>
+                Volver a categorías
+            </button>
+
+            <!-- Filters -->
+            <div class="gallery-filters" id="galleryFilters">
+                <button class="filter-btn active" data-filter="all">Todas</button>
+                <button class="filter-btn" data-filter="pilones">Pilones</button>
+                <button class="filter-btn" data-filter="arquitectura">Arquitectura</button>
+                <button class="filter-btn" data-filter="bodegones">Bodegones</button>
+                <button class="filter-btn" data-filter="carteles">Carteles</button>
+                <button class="filter-btn" data-filter="dibujo">Dibujo</button>
+                <button class="filter-btn" data-filter="otras-miradas">Otras miradas</button>
+                <button class="filter-btn" data-filter="retratos">Retratos</button>
+            </div>
 
             <!-- Categories Preview -->
             <div class="categories-preview" id="categoriesPreview">
