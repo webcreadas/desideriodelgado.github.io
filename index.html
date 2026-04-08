@@ -45,15 +45,21 @@
 
         /* Categories Preview Grid - 4 columns first row, 3 second row */
         .categories-preview {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            display: flex;
+            flex-direction: column;
             gap: var(--space-6);
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .categories-preview .category-card:nth-child(n+5) {
-            grid-column: span 1;
+        .categories-row {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-6);
+        }
+
+        .categories-row .category-card {
+            width: 250px;
         }
 
         .category-card {
@@ -136,14 +142,32 @@
 
         @media (max-width: 1024px) {
             .categories-preview {
-                grid-template-columns: repeat(3, 1fr);
+                gap: var(--space-4);
+            }
+
+            .categories-row {
+                flex-wrap: wrap;
+                gap: var(--space-4);
+            }
+
+            .categories-row .category-card {
+                width: 200px;
             }
         }
 
         @media (max-width: 768px) {
             .categories-preview {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
+                gap: var(--space-3);
+            }
+
+            .categories-row {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .categories-row .category-card {
+                width: 100%;
+                max-width: 300px;
             }
 
             .category-card-title {
@@ -721,53 +745,59 @@
 
             <!-- Categories Preview -->
             <div class="categories-preview" id="categoriesPreview">
-                <div class="category-card" data-category="pilones">
-                    <img src="assets/images/obras/pilones/DESIDERIO_01.webp" alt="Serie Pilones" loading="eager">
-                    <div class="category-card-overlay">
-                        <h3 class="category-card-title">Pilones</h3>
-                        <span class="category-card-count">96 obras</span>
+                <!-- First row: 4 categories -->
+                <div class="categories-row">
+                    <div class="category-card" data-category="pilones">
+                        <img src="assets/images/obras/pilones/DESIDERIO_01.webp" alt="Serie Pilones" loading="eager">
+                        <div class="category-card-overlay">
+                            <h3 class="category-card-title">Pilones</h3>
+                            <span class="category-card-count">96 obras</span>
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="arquitectura">
+                        <img src="assets/images/obras/arquitectura/DESIDERIO_28.webp" alt="Arquitectura" loading="eager">
+                        <div class="category-card-overlay">
+                            <h3 class="category-card-title">Arquitectura</h3>
+                            <span class="category-card-count">6 obras</span>
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="bodegones">
+                        <img src="assets/images/obras/bodegones/frutero.webp" alt="Bodegones" loading="eager">
+                        <div class="category-card-overlay">
+                            <h3 class="category-card-title">Bodegones</h3>
+                            <span class="category-card-count">4 obras</span>
+                        </div>
+                    </div>
+                    <div class="category-card" data-category="carteles">
+                        <img src="assets/images/obras/carteles/Flamenco_3.webp" alt="Carteles" loading="eager">
+                        <div class="category-card-overlay">
+                            <h3 class="category-card-title">Carteles</h3>
+                            <span class="category-card-count">10 obras</span>
+                        </div>
                     </div>
                 </div>
-                <div class="category-card" data-category="arquitectura">
-                    <img src="assets/images/obras/arquitectura/DESIDERIO_28.webp" alt="Arquitectura" loading="eager">
-                    <div class="category-card-overlay">
-                        <h3 class="category-card-title">Arquitectura</h3>
-                        <span class="category-card-count">6 obras</span>
+                <!-- Second row: 3 categories -->
+                <div class="categories-row">
+                    <div class="category-card" data-category="dibujo">
+                        <img src="assets/images/obras/dibujo/DESIDERIO_dib01.webp" alt="Dibujo" loading="eager">
+                        <div class="category-card-overlay">
+                            <h3 class="category-card-title">Dibujo</h3>
+                            <span class="category-card-count">14 obras</span>
+                        </div>
                     </div>
-                </div>
-                <div class="category-card" data-category="bodegones">
-                    <img src="assets/images/obras/bodegones/frutero.webp" alt="Bodegones" loading="eager">
-                    <div class="category-card-overlay">
-                        <h3 class="category-card-title">Bodegones</h3>
-                        <span class="category-card-count">4 obras</span>
+                    <div class="category-card" data-category="otras-miradas">
+                        <img src="assets/images/obras/otras-miradas/DESIDERIO_ANSORENA4013.webp" alt="Otras miradas" loading="eager">
+                        <div class="category-card-overlay">
+                            <h3 class="category-card-title">Otras miradas</h3>
+                            <span class="category-card-count">35 obras</span>
+                        </div>
                     </div>
-                </div>
-                <div class="category-card" data-category="carteles">
-                    <img src="assets/images/obras/carteles/Flamenco_3.webp" alt="Carteles" loading="eager">
-                    <div class="category-card-overlay">
-                        <h3 class="category-card-title">Carteles</h3>
-                        <span class="category-card-count">10 obras</span>
-                    </div>
-                </div>
-                <div class="category-card" data-category="dibujo">
-                    <img src="assets/images/obras/dibujo/DESIDERIO_dib01.webp" alt="Dibujo" loading="eager">
-                    <div class="category-card-overlay">
-                        <h3 class="category-card-title">Dibujo</h3>
-                        <span class="category-card-count">14 obras</span>
-                    </div>
-                </div>
-                <div class="category-card" data-category="otras-miradas">
-                    <img src="assets/images/obras/otras-miradas/DESIDERIO_ANSORENA4013.webp" alt="Otras miradas" loading="eager">
-                    <div class="category-card-overlay">
-                        <h3 class="category-card-title">Otras miradas</h3>
-                        <span class="category-card-count">35 obras</span>
-                    </div>
-                </div>
-                <div class="category-card" data-category="retratos">
-                    <img src="assets/images/obras/retratos/AA_01h.webp" alt="Retratos" loading="eager">
-                    <div class="category-card-overlay">
-                        <h3 class="category-card-title">Retratos</h3>
-                        <span class="category-card-count">8 obras</span>
+                    <div class="category-card" data-category="retratos">
+                        <img src="assets/images/obras/retratos/AA_01h.webp" alt="Retratos" loading="eager">
+                        <div class="category-card-overlay">
+                            <h3 class="category-card-title">Retratos</h3>
+                            <span class="category-card-count">8 obras</span>
+                        </div>
                     </div>
                 </div>
             </div>
