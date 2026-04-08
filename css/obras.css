@@ -103,7 +103,7 @@
     opacity: 1;
     border-radius: 16px;
     aspect-ratio: 5 / 3;
-    width: 250px;
+    width: 280px;
 }
 
 .gallery-item.hidden {
@@ -314,7 +314,7 @@
     }
 
     .gallery-item {
-        width: 200px;
+        width: 220px;
     }
 
     .gallery-title {
