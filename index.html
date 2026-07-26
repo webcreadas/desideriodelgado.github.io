@@ -49,18 +49,18 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 24px;
+            gap: 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .categories-preview .category-card {
-            width: calc((100% - 48px) / 3);
+            width: 30%;
             flex-shrink: 0;
         }
 
         .categories-preview .category-card:nth-child(n+4) {
-            width: calc((100% - 72px) / 4);
+            width: 22%;
         }
 
         .category-card {
@@ -142,20 +142,16 @@
         }
 
         @media (max-width: 1024px) {
-            .categories-preview {
-                flex-wrap: wrap;
-            }
-
             .categories-preview .category-card,
             .categories-preview .category-card:nth-child(n+4) {
-                width: calc((100% - var(--space-6)) / 2);
+                width: 46%;
             }
         }
 
         @media (max-width: 768px) {
-            .categories-preview {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto;
+            .categories-preview .category-card,
+            .categories-preview .category-card:nth-child(n+4) {
+                width: 100%;
             }
 
             .category-card-title {
