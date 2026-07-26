@@ -47,19 +47,19 @@
         /* Categories Preview Grid - 3 columns x 2 rows */
         .categories-preview {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
+            grid-template-columns: repeat(7, 1fr);
             gap: 24px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .categories-preview .category-card:nth-child(1) { grid-column: 1 / 5; }
-        .categories-preview .category-card:nth-child(2) { grid-column: 5 / 9; }
-        .categories-preview .category-card:nth-child(3) { grid-column: 9 / 13; }
-        .categories-preview .category-card:nth-child(4) { grid-column: 2 / 5; }
-        .categories-preview .category-card:nth-child(5) { grid-column: 5 / 8; }
-        .categories-preview .category-card:nth-child(6) { grid-column: 8 / 11; }
-        .categories-preview .category-card:nth-child(7) { grid-column: 11 / 14; }
+        .categories-preview .category-card:nth-child(1) { grid-column: 2 / 4; }
+        .categories-preview .category-card:nth-child(2) { grid-column: 4 / 6; }
+        .categories-preview .category-card:nth-child(3) { grid-column: 6 / 8; }
+        .categories-preview .category-card:nth-child(4) { grid-column: 1 / 3; }
+        .categories-preview .category-card:nth-child(5) { grid-column: 3 / 5; }
+        .categories-preview .category-card:nth-child(6) { grid-column: 5 / 7; }
+        .categories-preview .category-card:nth-child(7) { grid-column: 7 / 9; }
 
         .category-card {
             position: relative;
@@ -143,11 +143,19 @@
             .categories-preview {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .categories-preview .category-card:nth-child(n) {
+                grid-column: auto;
+            }
         }
 
         @media (max-width: 768px) {
             .categories-preview {
                 grid-template-columns: 1fr;
+            }
+
+            .categories-preview .category-card:nth-child(n) {
+                grid-column: auto;
             }
 
             .category-card-title {
