@@ -46,16 +46,11 @@
 
         /* Categories Preview Grid - 3 columns x 2 rows */
         .categories-preview {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 24px;
             max-width: 1200px;
             margin: 0 auto;
-        }
-
-        .categories-preview .category-card {
-            width: calc((100% - 72px) / 4);
         }
 
         .category-card {
@@ -137,14 +132,14 @@
         }
 
         @media (max-width: 1024px) {
-            .categories-preview .category-card {
-                width: calc((100% - 48px) / 3);
+            .categories-preview {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
         @media (max-width: 768px) {
-            .categories-preview .category-card {
-                width: 100%;
+            .categories-preview {
+                grid-template-columns: 1fr;
             }
 
             .category-card-title {
