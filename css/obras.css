@@ -110,7 +110,7 @@
     cursor: pointer;
     opacity: 1;
     aspect-ratio: 5 / 3;
-    width: 320px;
+    width: 380px;
 }
 
 .gallery-item:hover {
@@ -154,6 +154,14 @@
 }
 
 .gallery-item img.top-center {
+    object-position: top center;
+}
+
+.gallery-item[data-category="retratos"] {
+    aspect-ratio: 3 / 4;
+}
+
+.gallery-item[data-category="retratos"] img {
     object-position: top center;
 }
 
@@ -245,6 +253,15 @@
     max-width: 100%;
     max-height: 80vh;
     object-fit: contain;
+}
+
+.lightbox[data-category="retratos"] .lightbox-image {
+    height: 80vh;
+    max-height: 80vh;
+    width: auto;
+    max-width: 90vw;
+    object-fit: cover;
+    object-position: top center;
 }
 
 .lightbox-caption {
@@ -352,7 +369,7 @@
     }
 
     .gallery-item {
-        width: 250px;
+        width: 300px;
     }
 
     .gallery-title {

@@ -147,6 +147,7 @@
         function openLightbox(item) {
             const img = item.querySelector('img');
             const title = item.querySelector('.gallery-item-title');
+            const category = item.dataset.category || '';
 
             if (img && lightboxImage) {
                 lightboxImage.src = img.src;
@@ -156,6 +157,8 @@
             if (title && lightboxCaption) {
                 lightboxCaption.textContent = title.textContent;
             }
+
+            lightbox.dataset.category = category;
 
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden'; // Prevent scrolling

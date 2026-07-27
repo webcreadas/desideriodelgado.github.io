@@ -126,12 +126,16 @@
 
 .hero-title {
     font-family: 'Archivo Black', sans-serif;
-    font-size: clamp(1.5rem, 4vw, 3rem);
+    font-size: clamp(2.2rem, 5.5vw, 4.2rem);
     color: var(--color-white);
-    letter-spacing: 0.2em;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
     text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
     white-space: nowrap;
+}
+
+.hero-name-first {
+    margin-right: 0.7em;
 }
 
 /* ----------------------------------------
@@ -179,8 +183,8 @@
     }
 
     .hero-title {
-        font-size: clamp(1rem, 5vw, 1.5rem);
-        letter-spacing: 0.15em;
+        font-size: clamp(1.5rem, 6.5vw, 2.4rem);
+        letter-spacing: 0.25em;
     }
 }
 
