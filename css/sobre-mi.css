@@ -176,7 +176,7 @@
 
 .exhibition-item {
     display: inline-flex;
-    gap: 0.5rem;
+    gap: 0.35rem;
     font-family: 'Manrope', sans-serif;
     font-size: var(--text-sm);
     line-height: 1.6;
@@ -185,6 +185,7 @@
 .exhibition-year {
     font-weight: 600;
     color: var(--color-text);
+    white-space: nowrap;
 }
 
 .exhibition-details {
