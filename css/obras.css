@@ -266,6 +266,24 @@
     object-position: top center;
 }
 
+.lightbox[data-category="arquitectura"][data-orientation="horizontal"] .lightbox-image {
+    width: 90vw;
+    height: 70vh;
+    max-width: 90vw;
+    max-height: 70vh;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.lightbox[data-category="arquitectura"][data-orientation="vertical"] .lightbox-image {
+    height: 85vh;
+    max-height: 85vh;
+    width: auto;
+    max-width: 90vw;
+    object-fit: cover;
+    object-position: top center;
+}
+
 .lightbox-caption {
     font-family: var(--font-menu);
     font-size: var(--text-sm);

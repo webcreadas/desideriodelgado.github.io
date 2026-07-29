@@ -159,6 +159,7 @@
             }
 
             lightbox.dataset.category = category;
+            lightbox.dataset.orientation = item.dataset.orientation || '';
 
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden'; // Prevent scrolling
