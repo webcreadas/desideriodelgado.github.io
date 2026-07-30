@@ -97,28 +97,31 @@
 
         .category-card-overlay {
             position: absolute;
-            bottom: 0;
+            top: 0;
             left: 0;
             right: 0;
-            padding: var(--space-6);
-            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
-            text-align: center;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.45);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            transition: background var(--transition-normal);
+        }
+
+        .category-card:hover .category-card-overlay {
+            background: rgba(255, 255, 255, 0.55);
         }
 
         .category-card-title {
-            font-family: var(--font-elegant);
+            font-family: 'Manrope', sans-serif;
+            font-weight: 300;
             font-size: var(--text-xl);
-            color: var(--color-white);
+            color: #1a1a1a;
             letter-spacing: 0.05em;
-            margin-bottom: var(--space-1);
-        }
-
-        .category-card-count {
-            font-family: var(--font-menu);
-            font-size: var(--text-xs);
-            color: rgba(255, 255, 255, 0.8);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+            text-align: center;
+            margin: 0;
         }
 
         /* Back Button */
@@ -743,28 +746,24 @@
                         <img src="assets/images/obras/pilones/DESIDERIO_01.webp" alt="Serie Pilones" loading="eager">
                         <div class="category-card-overlay">
                             <h3 class="category-card-title">Pilones</h3>
-                            <span class="category-card-count">45 obras</span>
                         </div>
                     </div>
                     <div class="category-card" data-category="arquitectura">
                         <img src="assets/images/obras/arquitectura/DESIDERIO_28.webp" alt="Arquitectura" loading="eager">
                         <div class="category-card-overlay">
                             <h3 class="category-card-title">Arquitectura</h3>
-                            <span class="category-card-count">8 obras</span>
                         </div>
                     </div>
                     <div class="category-card" data-category="bodegones">
                         <img src="assets/images/obras/bodegones/frutero.webp" alt="Bodegones" loading="eager">
                         <div class="category-card-overlay">
                             <h3 class="category-card-title">Bodegones</h3>
-                            <span class="category-card-count">11 obras</span>
                         </div>
                     </div>
                     <div class="category-card" data-category="carteles">
                         <img src="assets/images/obras/carteles/Flamenco_3.webp" alt="Carteles" loading="eager">
                         <div class="category-card-overlay">
                             <h3 class="category-card-title">Carteles</h3>
-                            <span class="category-card-count">10 obras</span>
                         </div>
                     </div>
                 </div>
@@ -774,21 +773,18 @@
                         <img src="assets/images/obras/dibujo/DESIDERIO_dib01.webp" alt="Dibujo" loading="eager">
                         <div class="category-card-overlay">
                             <h3 class="category-card-title">Dibujo</h3>
-                            <span class="category-card-count">14 obras</span>
                         </div>
                     </div>
                     <div class="category-card" data-category="otras-miradas">
                         <img src="assets/images/obras/otras-miradas/DESIDERIO_ANSORENA4013.webp" alt="Otras miradas" loading="eager">
                         <div class="category-card-overlay">
                             <h3 class="category-card-title">Otras miradas</h3>
-                            <span class="category-card-count">23 obras</span>
                         </div>
                     </div>
                     <div class="category-card" data-category="retratos">
                         <img src="assets/images/obras/retratos/02.webp" alt="Retratos" loading="eager" class="top-center">
                         <div class="category-card-overlay">
                             <h3 class="category-card-title">Retratos</h3>
-                            <span class="category-card-count">9 obras</span>
                         </div>
                     </div>
                 </div>
